@@ -8,7 +8,6 @@
 
 makeCacheMatrix <- function(x = matrix()) {
         # assume matrix is always invertible.
-        # solve(x) returns inverse of matrix x.
         
         m<-NULL
         set <- function(y){
@@ -17,7 +16,7 @@ makeCacheMatrix <- function(x = matrix()) {
         } 
         
         get <- function() x
-        setInverse <- function(solve) m <<- solve
+        setInverse <- function(inverse) m <<- inverse
         getInverse <- function() m
         list(set = set, get = get,
              setInverse = setInverse, 
@@ -39,7 +38,7 @@ cacheSolve <- function(x, ...) {
                 return(m)
         }
         data <- x$get()
-        m <- solve(data, ...)
+        m <- solve(data, ...) # solve(x) returns inverse of matrix x.
         x$setInverse(m)
         m
 }
